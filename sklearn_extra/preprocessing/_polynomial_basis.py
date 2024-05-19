@@ -36,10 +36,15 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
         bias=True, the product of the first two basis functions is excluded.
 
 
+    Notes
+    -----
+    Inheriting classes should override the `vandermonde_matrix` method to
+    generate the Vandermonde matrix of the concrete polynomial basis.
+
+
     References
     ----------
-    [1] https://en.wikipedia.org/wiki/Bernstein_polynomial
-    [2] https://alexshtf.github.io/2024/02/11/Bernstein-Sklearn.html
+    [1] https://en.wikipedia.org/wiki/Vandermonde_matrix
     """
     def __init__(self, degree=5, bias=False, na_value=0., interactions=False):
         self.degree = degree
@@ -94,6 +99,18 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
 
 
 class BernsteinFeatures(PolynomialBasisTransformer):
+    """
+    Polynomial basis transformer for generating polynomial features using the Bernstein basis.
+
+    See Also
+    --------
+    PolynomialBasisTransformer
+
+    References
+    ----------
+    [1] https://en.wikipedia.org/wiki/Bernstein_polynomial
+    [2]: https://alexshtf.github.io/2024/02/11/Bernstein-Sklearn.html
+    """
     def vandermonde_matrix(self, column):
         basis_idx = np.arange(1 + self.degree)
         basis = binom.pmf(basis_idx, self.degree, column[:, None])
