@@ -57,6 +57,7 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
         self.bias = check_scalar(self.bias, 'bias', bool)
         self.na_value = check_scalar(self.na_value, 'na_value', float)
         self.interactions = check_scalar(self.interactions, 'interactions', bool)
+        check_array(X, estimator=self, input_name='X', force_all_finite='allow-nan')        return self
         self.is_fitted_ = True
         return self
 
