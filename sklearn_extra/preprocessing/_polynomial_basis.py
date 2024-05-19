@@ -23,7 +23,7 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         check_is_fitted(self)
 
-        X = check_array(X, estimator=self, input_name='X')
+        X = check_array(X, estimator=self, input_name='X', force_all_finite='allow-nan')
 
         # Get the number of columns in the input array
         n_rows, n_features = X.shape

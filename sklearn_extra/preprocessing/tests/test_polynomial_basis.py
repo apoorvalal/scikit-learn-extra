@@ -6,7 +6,6 @@ from sklearn_extra.preprocessing import BernsteinFeatures
 
 from sklearn.utils._testing import (
     assert_array_almost_equal,
-    assert_almost_equal,
 )
 
 feature_1d = np.array([0, 0.5, 1, np.nan])
