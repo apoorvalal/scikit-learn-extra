@@ -60,7 +60,7 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
         self.interactions = check_scalar(
             self.interactions, "interactions", bool
         )
-        check_array(X, estimator=self, input_name='X', force_all_finite='allow-nan')        return self
+        check_array(X, estimator=self, input_name='X', force_all_finite='allow-nan')
         self.is_fitted_ = True
         return self
 
