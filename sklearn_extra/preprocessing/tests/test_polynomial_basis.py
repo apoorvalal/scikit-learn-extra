@@ -39,10 +39,7 @@ def test_correct_output_one_feature():
     output = bbt.transform(feature_1d)
     print(output)
     expected_output = np.array(
-        [[0.0, 0.0],
-         [0.5, 0.25],
-         [0.0, 1.0],
-         [0.0, 0.0]]
+        [[0.0, 0.0], [0.5, 0.25], [0.0, 1.0], [0.0, 0.0]]
     )
     assert_array_almost_equal(output, expected_output)
 
