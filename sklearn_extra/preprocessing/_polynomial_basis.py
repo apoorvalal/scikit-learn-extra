@@ -46,17 +46,20 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
     ----------
     [1] https://en.wikipedia.org/wiki/Vandermonde_matrix
     """
-    def __init__(self, degree=5, bias=False, na_value=0., interactions=False):
+
+    def __init__(self, degree=5, bias=False, na_value=0.0, interactions=False):
         self.degree = degree
         self.bias = bias
         self.na_value = na_value
         self.interactions = interactions
 
     def fit(self, X, y=None):
-        self.degree = check_scalar(self.degree, 'degree', int, min_val=0)
-        self.bias = check_scalar(self.bias, 'bias', bool)
-        self.na_value = check_scalar(self.na_value, 'na_value', float)
-        self.interactions = check_scalar(self.interactions, 'interactions', bool)
+        self.degree = check_scalar(self.degree, "degree", int, min_val=0)
+        self.bias = check_scalar(self.bias, "bias", bool)
+        self.na_value = check_scalar(self.na_value, "na_value", float)
+        self.interactions = check_scalar(
+            self.interactions, "interactions", bool
+        )
         check_array(X, estimator=self, input_name='X', force_all_finite='allow-nan')        return self
         self.is_fitted_ = True
         return self
@@ -64,15 +67,16 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         check_is_fitted(self)
 
-        X = check_array(X, estimator=self, input_name='X', force_all_finite='allow-nan')
+        X = check_array(
+            X, estimator=self, input_name="X", force_all_finite="allow-nan"
+        )
 
         # Get the number of columns in the input array
         n_rows, n_features = X.shape
 
         # Compute the specific polynomial basis for each column
         basis_features = [
-            self.feature_matrix(X[:, i])
-            for i in range(n_features)
+            self.feature_matrix(X[:, i]) for i in range(n_features)
         ]
 
         # create interaction features - basis tensor products
@@ -112,6 +116,7 @@ class BernsteinFeatures(PolynomialBasisTransformer):
     [1] https://en.wikipedia.org/wiki/Bernstein_polynomial
     [2]: https://alexshtf.github.io/2024/02/11/Bernstein-Sklearn.html
     """
+
     def vandermonde_matrix(self, column):
         basis_idx = np.arange(1 + self.degree)
         basis = binom.pmf(basis_idx, self.degree, column[:, None])
