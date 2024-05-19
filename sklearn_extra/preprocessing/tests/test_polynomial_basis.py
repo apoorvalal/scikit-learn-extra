@@ -44,7 +44,7 @@ def test_correct_output_one_feature():
 
 
 def test_correct_output_two_features():
-    bbt = BernsteinFeatures(degree=2).fit(np.empty(0))
+    bbt = BernsteinFeatures(degree=2).fit(feature_2d)
     output = bbt.transform(feature_2d)
     expected_output = np.array(
         [
@@ -57,7 +57,7 @@ def test_correct_output_two_features():
 
 
 def test_correct_output_interactions():
-    bbt = BernsteinFeatures(degree=2, interactions=True).fit(np.empty(0))
+    bbt = BernsteinFeatures(degree=2, interactions=True).fit(feature_2d)
     output = bbt.transform(feature_2d)
     expected_output = np.array(
         [
