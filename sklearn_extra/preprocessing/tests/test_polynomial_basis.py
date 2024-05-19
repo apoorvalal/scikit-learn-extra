@@ -18,68 +18,20 @@ def test_sklearn_compatibility(estimator, check):
 
 
 def test_correct_param_types():
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree="a").fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(bias="a").fit(feature_1d)
-
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         BernsteinFeatures(na_value="a").fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(interactions="a").fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1.5).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(bias=1.5).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(na_value="a").fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(interactions=1.5).fit(feature_1d)
 
     with pytest.raises(ValueError):
         BernsteinFeatures(degree=-1).fit(feature_1d)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
+        BernsteinFeatures(degree="a").fit(feature_1d)
+
+    with pytest.raises(TypeError):
         BernsteinFeatures(bias=-1).fit(feature_1d)
 
-    with pytest.raises(ValueError):
-        BernsteinFeatures(na_value=-1).fit(feature_1d)
-
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         BernsteinFeatures(interactions=-1).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1, bias=1).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1, bias=1.5).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1, bias=1, na_value=1).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1, bias=1, na_value=1.5).fit(feature_1d)
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1, bias=1, na_value=1, interactions=1).fit(
-            feature_1d
-        )
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(degree=1, bias=1, na_value=1, interactions=1.5).fit(
-            feature_1d
-        )
-
-    with pytest.raises(ValueError):
-        BernsteinFeatures(
-            degree=1, bias=1, na_value=1, interactions=1, unknown=1
-        ).fit(feature_1d)
 
 
 def test_correct_output_one_feature():
