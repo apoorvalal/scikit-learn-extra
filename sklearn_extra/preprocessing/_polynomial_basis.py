@@ -73,7 +73,6 @@ class PolynomialBasisTransformer(TransformerMixin, BaseEstimator):
 
         X = self._validate_data(
             X,
-            order="F",
             dtype=FLOAT_DTYPES,
             reset=False,
             force_all_finite="allow-nan",
