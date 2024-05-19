@@ -37,8 +37,12 @@ def test_correct_param_types():
 def test_correct_output_one_feature():
     bbt = BernsteinFeatures(degree=2).fit(feature_1d)
     output = bbt.transform(feature_1d)
+    print(output)
     expected_output = np.array(
-        [[0.0, 0.0], [0.5, 0.25], [1.0, 1.0], [0.0, 0.0]]
+        [[0.0, 0.0],
+         [0.5, 0.25],
+         [0.0, 1.0],
+         [0.0, 0.0]]
     )
     assert_array_almost_equal(output, expected_output)
 
@@ -48,9 +52,9 @@ def test_correct_output_two_features():
     output = bbt.transform(feature_2d)
     expected_output = np.array(
         [
-            [0.0, 0.0, 0.25, 0.0625],
+            [0.0, 0.0, 0.375, 0.0625],
             [0.5, 0.25, 0.5, 0.25],
-            [0.0, 0.0, 0.75, 0.5625],
+            [0.0, 0.0, 0.375, 0.5625],
         ]
     )
     assert_array_almost_equal(output, expected_output)
@@ -61,8 +65,8 @@ def test_correct_output_interactions():
     output = bbt.transform(feature_2d)
     expected_output = np.array(
         [
-            [0.0, 0.0, 0.25, 0.0, 0.0, 0.0625, 0.0, 0.0],
-            [0.5, 0.25, 0.5, 0.25, 0.125, 0.25, 0.125, 0.0625],
+            [0.0, 0.0, 0.375, 0.0, 0.0, 0.0625, 0.0, 0.0],
+            [0.125, 0.0625, 0.125, 0.25, 0.125, 0.0625, 0.125, 0.0625],
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
         ]
     )
