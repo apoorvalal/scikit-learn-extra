@@ -109,6 +109,13 @@ class PolynomialBasisTransformer(TransformerMixin, BaseEstimator):
     def vandermonde_matrix(self, column):
         raise NotImplementedError("Subclasses must implement this method.")
 
+    def _get_tags(self):
+        base_tags = super()._get_tags()
+        return base_tags | {
+            "allow_nan": True,
+            "requires_y": False,
+            "stateless": True
+        }
 
 class BernsteinFeatures(PolynomialBasisTransformer):
     """
