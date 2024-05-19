@@ -5,7 +5,11 @@
 
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.utils.validation import FLOAT_DTYPES, check_is_fitted, check_scalar
+from sklearn.utils.validation import (
+    FLOAT_DTYPES,
+    check_is_fitted,
+    check_scalar,
+)
 from itertools import combinations
 from scipy.stats import binom
 
@@ -67,7 +71,13 @@ class PolynomialBasisTransformer(TransformerMixin, BaseEstimator):
     def transform(self, X):
         check_is_fitted(self)
 
-        X = self._validate_data(X, order="F", dtype=FLOAT_DTYPES, reset=False, force_all_finite="allow-nan")
+        X = self._validate_data(
+            X,
+            order="F",
+            dtype=FLOAT_DTYPES,
+            reset=False,
+            force_all_finite="allow-nan",
+        )
 
         # Get the number of columns in the input array
         n_rows, n_features = X.shape
