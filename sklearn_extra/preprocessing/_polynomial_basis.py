@@ -5,12 +5,12 @@
 
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.utils.validation import check_array, check_is_fitted, check_scalar
+from sklearn.utils.validation import FLOAT_DTYPES, check_is_fitted, check_scalar
 from itertools import combinations
 from scipy.stats import binom
 
 
-class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
+class PolynomialBasisTransformer(TransformerMixin, BaseEstimator):
     """
     Polynomial basis transformer for generating polynomial features.
 
@@ -60,18 +60,14 @@ class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
         self.interactions = check_scalar(
             self.interactions, "interactions", bool
         )
-        check_array(
-            X, estimator=self, input_name="X", force_all_finite="allow-nan"
-        )
+        self._validate_data(X, force_all_finite="allow-nan")
         self.is_fitted_ = True
         return self
 
-    def transform(self, X, y=None):
+    def transform(self, X):
         check_is_fitted(self)
 
-        X = check_array(
-            X, estimator=self, input_name="X", force_all_finite="allow-nan"
-        )
+        X = self._validate_data(X, order="F", dtype=FLOAT_DTYPES, reset=False, force_all_finite="allow-nan")
 
         # Get the number of columns in the input array
         n_rows, n_features = X.shape
