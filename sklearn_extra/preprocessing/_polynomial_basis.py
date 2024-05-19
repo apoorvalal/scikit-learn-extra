@@ -114,7 +114,6 @@ class PolynomialBasisTransformer(TransformerMixin, BaseEstimator):
         return base_tags | {
             "allow_nan": True,
             "requires_y": False,
-            "stateless": True,
         }
 
 
