@@ -37,7 +37,6 @@ def test_correct_param_types():
 def test_correct_output_one_feature():
     bbt = BernsteinFeatures(degree=2).fit(feature_1d)
     output = bbt.transform(feature_1d)
-    print(output)
     expected_output = np.array(
         [[0.0, 0.0],
          [0.5, 0.25],
