@@ -8,7 +8,7 @@ from sklearn.utils._testing import (
     assert_array_almost_equal,
 )
 
-feature_1d = np.array([0, 0.5, 1, np.nan])
+feature_1d = np.array([0, 0.5, 1, np.nan]).reshape(-1, 1)
 feature_2d = np.array([[0, 0.25], [0.5, 0.5], [np.nan, 0.75]])
 
 
