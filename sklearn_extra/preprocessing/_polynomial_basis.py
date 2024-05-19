@@ -1,3 +1,8 @@
+"""BernsteinTransformer for generating polynomial features using the Bernstein basis."""
+
+# Author: Alex Shtoff
+# License: BSD 3 clause
+
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_array, check_is_fitted, check_scalar
@@ -6,6 +11,36 @@ from scipy.stats import binom
 
 
 class PolynomialBasisTransformer(BaseEstimator, TransformerMixin):
+    """
+    Polynomial basis transformer for generating polynomial features.
+
+    This transformer generates polynomial features of a given degree
+    for each data column separately, or tensor-product features for every
+    pair of columns if interactions=True.
+
+    Parameters
+    ----------
+
+    degree : int, default=5
+        The degree of the polynomial basis.
+
+    bias : bool, default=False
+        If True, avoids generating the first basis function, assuming it
+        represents the constant term.
+
+    na_value : float, default=0.
+        The value to replace NaNs in the input data with.
+
+    interactions : bool, default=False
+        If True, generates tensor-product features for every pair of columns. If
+        bias=True, the product of the first two basis functions is excluded.
+
+
+    References
+    ----------
+    [1] https://en.wikipedia.org/wiki/Bernstein_polynomial
+    [2] https://alexshtf.github.io/2024/02/11/Bernstein-Sklearn.html
+    """
     def __init__(self, degree=5, bias=False, na_value=0., interactions=False):
         self.degree = degree
         self.bias = bias
