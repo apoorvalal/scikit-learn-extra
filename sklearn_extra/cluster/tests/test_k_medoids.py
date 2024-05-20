@@ -405,13 +405,14 @@ def test_clara_consistency_iris():
 
 
 def test_seuclidean():
-    with pytest.warns(None) as record:
+    with warnings.catch_warnings(record=True) as record:
+        warnings.simplefilter("always")
         km = KMedoids(2, metric="seuclidean", method="pam")
-        km.fit(np.array([0, 0, 0, 1]).reshape((4, 1)))
-        km.predict(np.array([0, 0, 0, 1]).reshape((4, 1)))
-        km.transform(np.array([0, 0, 0, 1]).reshape((4, 1)))
-    assert len(record) == 0
-
+        valid_data = np.array([0, 0, 0, 1]).reshape((4, 1))
+        km.fit(valid_data)
+        km.predict(valid_data)
+        km.transform(valid_data)
+        assert len(record) == 0
 
 def test_medoids_indices():
     rng = np.random.RandomState(seed)

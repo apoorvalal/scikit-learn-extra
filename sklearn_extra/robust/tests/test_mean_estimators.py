@@ -1,5 +1,5 @@
+import warnings
 import numpy as np
-import pytest
 
 from sklearn_extra.robust.mean_estimators import median_of_means, huber
 
@@ -24,10 +24,11 @@ def test_mom():
         sample_cor[:num_out] = np.inf
         assert np.abs(median_of_means(sample_cor, num_out, rng)) < 2
 
-
 def test_huber():
     X = np.hstack([np.zeros(90), np.ones(10)])
-    with pytest.warns(None) as record:
+
+    with warnings.catch_warnings(record=True) as record:
+        warnings.simplefilter("always")
         mu = huber(X, c=0.5)
-    assert len(record) == 0
-    assert np.abs(mu) < 0.1
+        assert len(record) == 0
+        assert np.abs(mu) < 0.1
